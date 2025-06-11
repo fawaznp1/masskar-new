@@ -1,0 +1,45 @@
+.about-section {
+  background-color: white;
+  margin-top: 0.5rem;
+  padding: 3rem 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .about-section {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .about-section {
+    padding-left: 5rem;
+    padding-right: 5rem;
+  }
+}
+
+.about-banner {
+  width: 80%;
+  display: block;
+  margin: 0 auto;
+}
+
+.about-container {
+  max-width: 80rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.about-title {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+  font-weight: 700;
+  color: #065f46;
+  margin-bottom: 1.5rem;
+}
+
+.about-text {
+  color: #4b5563;
+  line-height: 1.625;
+  margin-bottom: 1rem;
+}
