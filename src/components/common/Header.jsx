@@ -11,7 +11,7 @@ const Header = () => {
   const [cartItems, setCartItems] = useState([]);
   const dropdownRef = useRef(null);
 
-  useEffect(() => {
+  useEffect(() => { 
     const handleScroll = () => {
       const isScrolled = window.scrollY > 10;
       setScrolled(isScrolled);
@@ -144,24 +144,24 @@ const Header = () => {
           </div>
 
           <nav className="desktop-nav">
-            <button onClick={() => handleNavigation('/')}>
+            <a onClick={() => handleNavigation('/')}>
               Home
-            </button>
-            <button onClick={() => handleNavigation('/about')}>
+            </a>
+            <a onClick={() => handleNavigation('/about')}>
               About
-            </button>
-            <button onClick={() => handleNavigation('/locations')}>
+            </a>
+            <a onClick={() => handleNavigation('/locations')}>
               Locations
-            </button>
+            </a>
 
             <div className="dropdown-container" ref={dropdownRef}>
-              <button 
+              <a 
                 onClick={() => setCategoriesOpen(!categoriesOpen)}
                 onMouseEnter={() => setCategoriesOpen(true)}
               >
                 <span>Categories</span>
                 <FaChevronDown className={`dropdown-icon ${categoriesOpen ? 'open' : ''}`} />
-              </button>
+              </a>
               
               <div 
                 className={`dropdown-menu ${categoriesOpen ? 'open' : ''}`}
@@ -219,7 +219,7 @@ const Header = () => {
                 </button>
               </div>
             ) : (
-              <button onClick={loginOnClick}>
+              <button style={{cursor:'pointer'}} onClick={loginOnClick}>
                 Login
               </button>
             )}

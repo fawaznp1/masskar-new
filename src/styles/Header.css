@@ -117,7 +117,7 @@
   }
 }
 
-.desktop-nav button {
+.desktop-nav a {
   padding-left: 1rem;
   padding-right: 1rem;
   padding-top: 0.5rem;
@@ -126,9 +126,10 @@
   color: rgba(55, 65, 81, 1);
   font-weight: 500;
   transition: all 0.2s;
+  cursor: pointer;
 }
 
-.desktop-nav button:hover {
+.desktop-nav a:hover {
   color: rgba(22, 163, 74, 1);
   background-color: rgba(240, 253, 244, 1);
 }
@@ -137,7 +138,7 @@
   position: relative;
 }
 
-.dropdown-container button {
+.dropdown-container a {
   display: flex;
   align-items: center;
   gap: 0.25rem;
@@ -151,7 +152,7 @@
   transition: all 0.2s;
 }
 
-.dropdown-container button:hover {
+.dropdown-container a:hover {
   color: rgba(22, 163, 74, 1);
   background-color: rgba(240, 253, 244, 1);
 }

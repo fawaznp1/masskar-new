@@ -1,0 +1,16 @@
+.cart {
+  background: #f9f9f9;
+  border-left: 1px solid #ccc;
+  padding: 16px;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.cart h3 {
+  margin-top: 0;
+}
+
+.cart ul {
+  list-style: none;
+  padding: 0;
+}

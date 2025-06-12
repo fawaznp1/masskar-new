@@ -1,0 +1,13 @@
+.homepage {
+  display: flex;
+}
+
+.products {
+  flex: 4;
+  padding: 16px;
+}
+
+.sidebar-cart {
+  flex: 1;
+  border-left: 1px solid #ddd;
+}
