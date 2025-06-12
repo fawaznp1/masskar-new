@@ -5,10 +5,9 @@ import AppRoutes from './routes/AppRoutes';
 function App() {
   return (
     <div className="App">
-    <CartProvider>
-  
-        <AppRoutes /> {/* file containing all routes */}
-    </CartProvider>
+      <CartProvider>
+        <AppRoutes />
+      </CartProvider>
     </div>
   );
 }
