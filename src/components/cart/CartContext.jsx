@@ -31,9 +31,34 @@ export const CartProvider = ({ children }) => {
     }
   }, [cart, user]);
 
-  const addToCart = (item) => {
+  const addToCart = (newItem) => {
     if (!user) throw new Error('Login required');
-    setCart((prev) => [...prev, { ...item, id: `${item.id}-${Date.now()}` }]);
+
+    setCart((prev) => {
+      const existingIndex = prev.findIndex(
+        item =>
+          item.originalId === newItem.originalId &&
+          item.cleaning === newItem.cleaning
+      );
+
+      if (existingIndex !== -1) {
+        const updatedCart = [...prev];
+        updatedCart[existingIndex] = {
+          ...updatedCart[existingIndex],
+          quantity: updatedCart[existingIndex].quantity + newItem.quantity
+        };
+        return updatedCart;
+      } else {
+        return [
+          ...prev,
+          {
+            ...newItem,
+            id: `${newItem.originalId}-${Date.now()}`,
+            originalId: newItem.originalId || newItem.id
+          }
+        ];
+      }
+    });
   };
 
   const removeFromCart = (itemId) => {
@@ -54,18 +79,23 @@ export const CartProvider = ({ children }) => {
 
   const clearCart = () => setCart([]);
 
-  const cartTotal = cart.reduce((total, item) => total + (item.pricePerKg * item.quantity), 0);
+  const cartTotal = cart.reduce(
+    (total, item) => total + item.pricePerKg * item.quantity,
+    0
+  );
 
   return (
-    <CartContext.Provider value={{
-      cart,
-      addToCart,
-      removeFromCart,
-      updateCartItemQuantity,
-      clearCart,
-      cartTotal,
-      user
-    }}>
+    <CartContext.Provider
+      value={{
+        cart,
+        addToCart,
+        removeFromCart,
+        updateCartItemQuantity,
+        clearCart,
+        cartTotal,
+        user,
+      }}
+    >
       {children}
     </CartContext.Provider>
   );

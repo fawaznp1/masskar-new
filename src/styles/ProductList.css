@@ -1,15 +1,15 @@
 .product-list {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 2rem;
-  padding: 2rem;
-  max-width: 1400px;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: .5rem;
+  padding: .5rem;
+  max-width: 1100px;
   margin: 0 auto;
 }
 
 .product-card {
   background: #fff;
-  border-radius: 16px;
+  border-radius: 1px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   overflow: hidden;
   transition: all 0.3s ease;
@@ -22,30 +22,35 @@
 }
 
 .product-card img {
-  width: 100%;
-  height: 200px;
+  width: 40%;
+  height: auto;
+  display: block;
+  margin: auto;
   object-fit: cover;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-}
+/*   border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+ */}
 
 .product-card h4 {
-  font-size: 1.25rem;
-  font-weight: 600;
+  font-size: 1rem;
+  font-weight: 300;
+  display: flex;
+  justify-content: center;
+  
   color: #1a1a1a;
-  margin: 1.5rem 1.5rem 0.75rem;
-  line-height: 1.3;
+  margin: .5rem .75rem 1rem;
+  line-height: .5;
 }
 
 .product-card p {
-  color: #666;
-  margin: 0 1.5rem 0.75rem;
-  font-size: 0.9rem;
-  line-height: 1.5;
-}
+  color: #090808;
+  margin: 0 auto ;
+  font-size: 0.7rem;
+/*   line-height: .5;
+ */}
 
 .product-card label {
   display: block;
-  margin: 1rem 1.5rem;
+  margin: .2rem 1rem;
   font-weight: 500;
   color: #333;
   font-size: 0.9rem;
@@ -54,7 +59,7 @@
 .product-card select,
 .product-card input {
   width: 100%;
-  padding: 0.75rem;
+  padding: 0.25rem;
   margin-top: 0.5rem;
   border: 2px solid #e5e5e5;
   border-radius: 8px;
@@ -66,7 +71,7 @@
 .product-card select:focus,
 .product-card input:focus {
   outline: none;
-  border-color: #3b82f6;
+  border-color: #047836;
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
 
@@ -85,4 +90,139 @@
   .product-card h4 {
     font-size: 1.1rem;
   }
+}
+
+
+
+/* ProductModal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.modal-content {
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 500px;
+  text-align: center;
+  animation: slideUp 0.3s ease-in-out;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+   display: flex;
+  align-items: center;
+}
+
+.modal-content img {
+  width: 100%;
+  max-height: 300px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+.modal-close {
+  background-color: teal;
+  color: white;
+  border: none;
+  
+  width: 50%;
+  
+  padding: 8px 14px;
+  margin-top: 10px;
+  cursor: pointer;
+  border-radius: 6px;
+  font-weight: bold;
+  transition: background 0.2s;
+}
+
+.modal-close:hover {
+  background-color: #0f766e;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+
+.quantity-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+   gap: 1px; 
+  margin-top: 16px;
+  margin-bottom: 10px;
+  margin: 16px 1px 10px 0;
+}
+
+.quantity-buttons button {
+  width: 30px;
+  height: 30px;
+  font-size: 18px;
+  background-color: teal;
+  color: white;
+  border: none;
+
+  cursor: pointer;
+}
+
+.quantity-buttons span {
+  min-width: 40px;
+  text-align: center;
+}
+
+/* home 3 tabs */
+.tabs {
+  display: flex;
+  justify-content: center;
+  margin: 1rem 0;
+  gap: 1rem;
+}
+
+.tab-button {
+  padding: 8px 16px;
+  border: 1px solid #ccc;
+  background: white;
+  cursor: pointer;
+  border-radius: 25px;
+  transition: background 0.2s;
+}
+
+.tab-button:hover {
+  background-color: #f0f0f0;
+}
+
+.tab-button.active {
+  background-color: #01795b;
+  color: white;
+  border-color: #03755e;
+}
+
+/* cart icon verlay */
+.cart-icon-overlay {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+ 
+ color: #0f766e;
+  padding: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
 }

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import ProductList from '../../components/cart/ProductList';
 import Cart from "../../components/cart/Cart";
-import './HomePage.css';
+import '../../styles/HomePage.css';
 
 import fishData from '../../data/fishData';
 import meatData from '../../data/meatData';

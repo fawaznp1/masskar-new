@@ -6,6 +6,10 @@
   margin-top: 4rem;
   position: relative;
   overflow: hidden;
+  
+}
+a{
+  text-decoration: none;
 }
 
 .footer-radial-gradient-1 {
