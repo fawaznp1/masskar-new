@@ -122,7 +122,7 @@ const Header = () => {
   return (
     <div className="header-wrapper">
       {/* Announcement Bar */}
-      <div className="announcement-bar">
+      {/* <div className="announcement-bar">
         <div className="announcement-content">
           <div className="announcement-item">
             <FaPhone className="announcement-icon" />
@@ -138,7 +138,7 @@ const Header = () => {
           </div>
         </div>
       </div>
-
+ */}
       {/* Main Header */}
       <header className={`header ${scrolled ? 'scrolled' : ''}`}>
         <div className="header-container">
@@ -178,14 +178,20 @@ const Header = () => {
           <div className="search-container">
             <div className="search-form">
               <div className="search-input-wrapper">
-                <FaSearch className="search-icon" onClick={handleSearch} />
+                <FaSearch className="search-icon" onClick={setSearchTerm} />
                 <input
                   type="text"
                   placeholder="Search products..."
                   value={searchTerm}
                  onChange={(e) => setSearchTerm(e.target.value)}
-                  onKeyPress={(e) => e.key === 'Enter' && handleSearch(e)}
-                  className="search-input"
+onKeyPress={(e) => {
+  if (e.key === 'Enter') {
+    setSearchTerm(e.target.value);
+    window.location.href = `/search?q=${encodeURIComponent(e.target.value)}`;
+  }
+}}
+
+className="search-input"
                 />
               </div>
             </div>
@@ -252,12 +258,12 @@ const Header = () => {
                 )}
               </div>
 
-              <button className="mobile-cart-button" onClick={() => handleNavigation('/cart')}>
+          {/*     <button className="mobile-cart-button" onClick={() => handleNavigation('/cart')}>
                 <FaShoppingCart />
                 {cartItemCount > 0 && (
                   <span className="cart-badge">{cartItemCount > 99 ? '99+' : cartItemCount}</span>
                 )}
-              </button>
+              </button> */}
 
               {user ? (
                 <div className="mobile-user-section">

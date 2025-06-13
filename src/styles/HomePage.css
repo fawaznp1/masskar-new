@@ -1,70 +1,117 @@
 .homepage {
-  display: flex;
-  flex-direction: row;
-  gap: 20px;
   padding: 20px;
-  position: relative;
 }
 
+/* Flex layout for desktop */
+.main-layout {
+  display: flex;
+  width: 100%;
+  gap: 20px;
+}
+
+/* Products section */
 .products {
-  flex: 4;
+  width: 100%;
+  grid-template-columns: repeat(2, 1fr);
 }
 
+/* Sidebar cart for desktop */
 .sidebar-cart {
-  flex: 1;
   border-left: 1px solid #ccc;
-  padding-left: 20px;
 }
 
-/* Hide cart by default on mobile */
-@media (max-width: 768px) {
-  .homepage {
-    flex-direction: column;
-  }
-
-  .products {
-    width: 100%;
-    flex: none;
-    padding: 0;
-  }
-
-  .sidebar-cart {
-    display: none;
-  }
-
-  /* Show cart if toggle is active */
-  .sidebar-cart.mobile-visible {
-    display: block;
-    border-left: none;
-    border-top: 1px solid #ccc;
-    margin-top: 20px;
-    padding-top: 20px;
-  }
-
-  .cart-toggle-btn {
-    display: block;
-    margin-bottom: 10px;
-    padding: 10px 20px;
-    background-color: #0066cc;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    width: fit-content;
-  }
-}
-
-/* Hide cart button on desktop */
-.cart-toggle-btn {
+/* Show cart only on desktop */
+.desktop-only {
   display: none;
 }
 
-/* 2 cards per row on mobile (inside .product-list) */
-@media (max-width: 768px) {
-  .product-list {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 5px;
-    
+/* Toggle button for mobile */
+.cart-toggle-btn {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 0.6rem 1rem;
+  background-color: teal;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  font-size: 1rem;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+/* Mobile styles (under 768px) */
+@media (max-width: 767px) {
+  .cart-toggle-btn {
+    display: block;
   }
+  
+  .sidebar-cart {
+    display: none;
+  }
+}
+
+/* Tablet styles (768px - 1024px) */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .cart-toggle-btn {
+    display: none; /* Hide toggle in tablet view */
+  }
+  
+  .sidebar-cart {
+    display: block; /* Show cart by default in tablet */
+    min-width: 300px; /* Give it reasonable width */
+  }
+  
+  .main-layout {
+    flex-direction: row; /* Ensure side-by-side layout */
+  }
+}
+
+/* Desktop styles (1025px and up) */
+@media (min-width: 1025px) {
+  .sidebar-cart.desktop-only {
+    display: block;
+  }
+
+  .cart-toggle-btn {
+    display: none;
+  }
+}
+
+/* Modal cart overlay (mobile only) */
+.mobile-cart-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+/* Modal cart content */
+.mobile-cart-content {
+  background-color: white;
+  width: 90%;
+  max-height: 90%;
+  overflow-y: auto;
+  padding: 20px;
+  border-radius: 10px;
+  position: relative;
+}
+
+/* Close button */
+.close-cart-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #333;
+  cursor: pointer;
 }

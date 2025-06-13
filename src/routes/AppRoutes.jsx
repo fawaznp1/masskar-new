@@ -18,7 +18,7 @@ function AppRoutes() {
          <SearchProvider>
            <Header />
          </SearchProvider>
-         {/*  comment only for live        <CookieConsent /> */}
+               <CookieConsent />
               <Routes>
           <Route path="*" element={<Navigate to="/category/fish" />} />
               <Route path='/login' element={<AuthForm />}></Route>

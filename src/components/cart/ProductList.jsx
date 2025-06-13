@@ -153,7 +153,7 @@ const ProductList = ({ data }) => {
                   {item.cleaningOptions.map((opt, i) => (
                     <option key={i} value={opt}>{opt}</option>
                   ))}
-                </select>
+                </select> 
               </label>
 
               <label>
@@ -172,6 +172,13 @@ const ProductList = ({ data }) => {
           );
         })}
       </div>
+
+      {activeTab === 'offers' ? (
+  <div className="offers-message">
+    <div className="offers-text">Currently we have no offers</div>
+  </div>
+) : null}
+
 
       {modalItem && (
         <div className="modal-overlay" onClick={() => setModalItem(null)}>

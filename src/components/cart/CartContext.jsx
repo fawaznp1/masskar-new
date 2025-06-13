@@ -80,7 +80,7 @@ export const CartProvider = ({ children }) => {
   const clearCart = () => setCart([]);
 
   const cartTotal = cart.reduce(
-    (total, item) => total + item.pricePerKg * item.quantity,
+    (total, item) => total + item.pricePerKg * item.quantity * item.minWeight,
     0
   );
 

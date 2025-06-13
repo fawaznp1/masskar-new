@@ -26,7 +26,7 @@ const Cart = () => {
   };
 
   const deliveryCharge = 3;
-  const total = cartTotal + deliveryCharge;
+  const total = cartTotal  + deliveryCharge;
 
   const handleConfirmOrder = () => {
     if (!user) {
@@ -104,14 +104,14 @@ const Cart = () => {
                     <h4 className="cart-item-title">{item.name}</h4>
                     <p className="cart-item-cleaning">Cleaning: {item.cleaning}</p>
                     <div className="quantity-line">
-                      <span className="cart-item-quantity">Qty: {item.quantity} </span>
+                      <span className="cart-item-quantity">Qty: {item.minWeight} kg * {item.quantity} </span>
                       <div className="quantity-controls">
                         <button onClick={() => handleDecrease(item)}>-</button>
                         <button onClick={() => handleIncrease(item)}>+</button>
                       </div>
                     </div>
                     <p className="cart-item-price">
-                      <strong>Item Total: ${(item.pricePerKg * item.quantity).toFixed(2)}</strong>
+                      <strong>Item Total: {(item.pricePerKg * item.quantity * item.minWeight).toFixed(2)} QR</strong>
                     </p>
                   </div>
                 </div>
@@ -122,9 +122,9 @@ const Cart = () => {
           <div className="order-summary-all">
             <div className="order-summary-container">
               <h4 className="order-summary-title"><CreditCard />  Order Summary</h4>
-              <p className="order-summary-row">Subtotal: <span>${cartTotal.toFixed(2)}</span></p>
-              <p className="order-summary-row">Delivery: <span>${deliveryCharge.toFixed(2)}</span></p>
-              <p className="order-summary-total">Total: <strong><span>${total.toFixed(2)}</span></strong></p>
+              <p className="order-summary-row">Subtotal: <span>{cartTotal.toFixed(2)} QR</span></p>
+              <p className="order-summary-row">Delivery: <span>{deliveryCharge.toFixed(2)} QR</span></p>
+              <p className="order-summary-total">Total: <strong><span>{total.toFixed(2)} QR</span></strong></p>
             </div>
           </div>
 
@@ -141,7 +141,7 @@ const Cart = () => {
                 >
                   <option value="Cash">Credit Card</option>
                   <option value="Card">Debit Card</option>
-                  <option value="Online Transfer">Cash</option>
+                  <option value="Online Transfer">Cash On Delivery</option>
                 </select>
               </label>
             </div>
