@@ -9,12 +9,15 @@ import DeliveryLocations from '../pages/Delivery Locations'
 import CookieConsent from '../components/common/Cookies'
 import HomePage from '../components/common/Layout'
 import { CartProvider } from '../components/cart/CartContext'
+import { SearchProvider } from '../components/common/SearchContext'
 
 function AppRoutes() {
   return (
     <div>
         <CartProvider>
-          <Header />
+         <SearchProvider>
+           <Header />
+         </SearchProvider>
          {/*  comment only for live        <CookieConsent /> */}
               <Routes>
           <Route path="*" element={<Navigate to="/category/fish" />} />

@@ -13,8 +13,9 @@ const allData = {
 };
 
 const HomePage = () => {
-  const { type } = useParams(); // grabs "fish" or "meat"  or any categorrry  from the URL
+  const { type } = useParams();
   const [cart, setCart] = useState([]);
+  const [showCartMobile, setShowCartMobile] = useState(false);
 
   const handleAddToCart = (item) => {
     setCart(prev => [...prev, item]);
@@ -24,10 +25,18 @@ const HomePage = () => {
 
   return (
     <div className="homepage">
+      <button
+        className="cart-toggle-btn"
+        onClick={() => setShowCartMobile(!showCartMobile)}
+      >
+        {showCartMobile ? 'Hide Cart' : 'View Cart'}
+      </button>
+
       <div className="products">
         <ProductList data={selectedData} onAddToCart={handleAddToCart} />
       </div>
-      <div className="sidebar-cart">
+
+      <div className={`sidebar-cart ${showCartMobile ? 'mobile-visible' : ''}`}>
         <Cart cartItems={cart} />
       </div>
     </div>

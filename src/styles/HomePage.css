@@ -1,13 +1,70 @@
 .homepage {
   display: flex;
+  flex-direction: row;
+  gap: 20px;
+  padding: 20px;
+  position: relative;
 }
 
 .products {
   flex: 4;
-  padding: 16px;
 }
 
 .sidebar-cart {
   flex: 1;
-  border-left: 1px solid #ddd;
+  border-left: 1px solid #ccc;
+  padding-left: 20px;
+}
+
+/* Hide cart by default on mobile */
+@media (max-width: 768px) {
+  .homepage {
+    flex-direction: column;
+  }
+
+  .products {
+    width: 100%;
+    flex: none;
+    padding: 0;
+  }
+
+  .sidebar-cart {
+    display: none;
+  }
+
+  /* Show cart if toggle is active */
+  .sidebar-cart.mobile-visible {
+    display: block;
+    border-left: none;
+    border-top: 1px solid #ccc;
+    margin-top: 20px;
+    padding-top: 20px;
+  }
+
+  .cart-toggle-btn {
+    display: block;
+    margin-bottom: 10px;
+    padding: 10px 20px;
+    background-color: #0066cc;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    width: fit-content;
+  }
+}
+
+/* Hide cart button on desktop */
+.cart-toggle-btn {
+  display: none;
+}
+
+/* 2 cards per row on mobile (inside .product-list) */
+@media (max-width: 768px) {
+  .product-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 5px;
+    
+  }
 }

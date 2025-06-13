@@ -4,6 +4,7 @@ import { useCart } from './CartContext';
 import '../../styles/ProductList.css';
 import { ShoppingCart } from 'lucide-react';
 import Toast from '../../components/common/Toast';
+import { useSearch } from '../common/SearchContext';
 
 const ProductList = ({ data }) => {
   const navigate = useNavigate();
@@ -11,6 +12,13 @@ const ProductList = ({ data }) => {
   const [selectedOptions, setSelectedOptions] = useState({});
   const [modalItem, setModalItem] = useState(null);
   const [toast, setToast] = useState(null);
+  const [activeTab, setActiveTab] = useState('all');
+  const { searchTerm } = useSearch();
+
+  const filteredDatafornav = data.filter(item =>
+    item.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
 
   const showToast = (message, type = 'info') => {
     setToast({ message, type });
@@ -34,42 +42,47 @@ const ProductList = ({ data }) => {
     }));
   };
 
-const handleQuantityChange = (item, change) => {
-  const selected = selectedOptions[item.id] || {};
-  const currentQuantity = selected.quantity !== undefined ? selected.quantity : 0.5;
+  const handleQuantityChange = (item, change) => {
+    const selected = selectedOptions[item.id] || {};
+    const currentQuantity = selected.quantity !== undefined ? selected.quantity : 0.5;
 
-  let newQuantity = currentQuantity + change;
+    let newQuantity = currentQuantity + change;
+    if (newQuantity < 0.5) newQuantity = 0.5;
 
-  // Prevent going below 0.5
-  if (newQuantity < 0.5) newQuantity = 0.5;
+    const currentUser = localStorage.getItem('currentUser');
+    if (!currentUser) {
+      showToast('Please log in to add items to your cart', 'error');
+      navigate('/login');
+      return;
+    }
 
-  const currentUser = localStorage.getItem('currentUser');
-  if (!currentUser) {
-    showToast('Please log in to add items to your cart', 'error');
-    navigate('/login');
-    return;
-  }
+    const cleaning = selected.cleaning;
+    if (!cleaning) {
+      showToast('Please select an option first', 'warning');
+      return;
+    }
 
-  const cleaning = selected.cleaning;
-  if (!cleaning) {
-    showToast('Please select a cleaning option first', 'warning');
-    return;
-  }
+    const newItem = {
+      ...item,
+      originalId: item.id,
+      id: `${item.id}-${cleaning}`,
+      quantity: change,
+      cleaning,
+    };
 
- const newItem = {
-  ...item,
-  originalId: item.id,
-  id: `${item.id}-${cleaning}`,
-  quantity: change,
-  cleaning,
-};
+    addToCart(newItem);
+    showToast(`${item.name} added to cart`, 'success');
+  };
 
-addToCart(newItem);
-
-
-  showToast(`${item.name} added to cart`, 'success');
-};
-
+  const filteredData = () => {
+    if (activeTab === 'offers') {
+      return data.filter(item => item.offer === true);
+    }
+    if (activeTab === 'low') {
+      return [...data].sort((a, b) => a.pricePerKg - b.pricePerKg);
+    }
+    return data;
+  };
 
   return (
     <>
@@ -77,8 +90,33 @@ addToCart(newItem);
         <Toast message={toast.message} type={toast.type} onClose={() => setToast(null)} />
       )}
 
+     {/* Tabs */}
+<div className='tabs'>
+  <button
+    onClick={() => setActiveTab('all')}
+    className={`tab-button ${activeTab === 'all' ? 'active' : ''}`}
+  >
+    All
+  </button>
+  <button
+    onClick={() => setActiveTab('offers')}
+    className={`tab-button ${activeTab === 'offers' ? 'active' : ''}`}
+  >
+    Offers
+  </button>
+  <button
+    onClick={() => setActiveTab('low')}
+    className={`tab-button ${activeTab === 'low' ? 'active' : ''}`}
+  >
+    Low Price
+  </button>
+</div>
+
+
       <div className="product-list">
-        {data.map(item => {
+{filteredData().filter(item =>
+  filteredDatafornav.some(navItem => navItem.id === item.id)
+).map(item => {
           const selected = selectedOptions[item.id] || {};
           const quantity = selected.quantity !== undefined ? selected.quantity : item.minWeight;
           const cleaning = selected.cleaning || '';
@@ -86,10 +124,9 @@ addToCart(newItem);
 
           return (
             <div className="product-card" key={item.id} style={{ position: 'relative' }}>
-              {/* Show cart icon if item is in cart */}
               {inCart && (
                 <div className="cart-icon-overlay">
-                  <ShoppingCart size={20}  />
+                  <ShoppingCart size={20} />
                 </div>
               )}
 
@@ -121,7 +158,7 @@ addToCart(newItem);
 
               <label>
                 <div className="quantity-buttons">
-                  <span>Quantity: {quantity} kg</span>
+                  <span className='quantity me-2'>Quantity: {quantity}  </span>
                   <button
                     onClick={() => handleQuantityChange(item, -1)}
                     disabled={quantity <= item.minWeight}
@@ -136,7 +173,6 @@ addToCart(newItem);
         })}
       </div>
 
-      {/* Modal */}
       {modalItem && (
         <div className="modal-overlay" onClick={() => setModalItem(null)}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>

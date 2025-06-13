@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { FaShoppingCart, FaSearch, FaBars, FaTimes, FaChevronDown, FaUser, FaPhone, FaEnvelope, FaTruck } from "react-icons/fa";
 import "../../styles/Header.css";
+import { useSearch } from "./SearchContext";
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -10,6 +11,8 @@ const Header = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [cartItems, setCartItems] = useState([]);
   const dropdownRef = useRef(null);
+    const { searchTerm, setSearchTerm } = useSearch(); //to search from diff jsonss 
+
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 10);
@@ -179,8 +182,8 @@ const Header = () => {
                 <input
                   type="text"
                   placeholder="Search products..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
+                  value={searchTerm}
+                 onChange={(e) => setSearchTerm(e.target.value)}
                   onKeyPress={(e) => e.key === 'Enter' && handleSearch(e)}
                   className="search-input"
                 />

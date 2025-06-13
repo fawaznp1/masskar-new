@@ -66,7 +66,7 @@ const meatData = [
   {
     id: 108,
     name: 'Duck Breast',
-    image: 'https://masskaronline.com/uploads/images/items/Arabic%20Local%20Lamb%20Boneless.jpg',
+    image:  'https://masskaronline.com/uploads/images/items/Fresh%20Chicken%20800gm.jpg',
     pricePerKg: 60,
     minWeight: 0.4,
     description: 'Rich, flavorful meat ideal for fine dining.',
@@ -129,7 +129,7 @@ const meatData = [
   {
     id: 115,
     name: 'Chicken Liver',
-    image: 'https://masskaronline.com/uploads/images/items/Fresh%20Chicken%20800gm.jpg',
+    image: 'https://masskaronline.com/uploads/images/items/Arabic%20Local%20Lamb%20Boneless.jpg',
     pricePerKg: 25,
     minWeight: 0.3,
     description: 'Delicate and iron-rich organ meat.',

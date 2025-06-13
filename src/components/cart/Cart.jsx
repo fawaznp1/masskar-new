@@ -77,7 +77,7 @@ const Cart = () => {
       removeFromCart(item.id);
     }
   };
-
+ 
   return (
     <div className="cart">
       {toast && ( 
@@ -87,9 +87,13 @@ const Cart = () => {
           onClose={() => setToast(null)}
         />
       )}
-      <h3> <ShoppingCart />  Your Cart ({cart.length} items)   </h3>
-      {cart.length === 0 ? (
-        <p>Your cart is empty</p>
+      <h3 className="cart-header">
+  <ShoppingCart className="cart-icon" /> 
+  <span className="cart-title">Your Cart</span>
+  <span className="cart-count">({cart.length} items)</span>
+</h3>
+{cart.length === 0 ? (
+  <p className="empty-cart-message">Your cart is empty</p>
       ) : (
         <>
           <div className="cart-items-wrapper">
@@ -100,7 +104,7 @@ const Cart = () => {
                     <h4 className="cart-item-title">{item.name}</h4>
                     <p className="cart-item-cleaning">Cleaning: {item.cleaning}</p>
                     <div className="quantity-line">
-                      <span className="cart-item-quantity">Qty: {item.quantity} kg</span>
+                      <span className="cart-item-quantity">Qty: {item.quantity} </span>
                       <div className="quantity-controls">
                         <button onClick={() => handleDecrease(item)}>-</button>
                         <button onClick={() => handleIncrease(item)}>+</button>
